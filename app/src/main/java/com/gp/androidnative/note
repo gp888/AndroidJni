@@ -1,0 +1,49 @@
+JNI在jni.h头文件中定义了jfieldID,jmethodID类型来分别代表Java端的属性和方法
+
+JNIEnv 类型:
+
+JNIEnv类型实际上代表了Java环境，通过JNIEnv*指针就可以对Java端的代码进行操作。
+比如我们可以使用JNIEnv来创建Java类中的对象，调用Java对象的方法，获取Java对象中的属性等
+
+JNIEnv类中有很多函数可以用，如下所示:
+
+NewObject: 创建Java类中的对象。
+NewString: 创建Java类中的String对象。
+NewArray: 创建类型为Type的数组对象。
+GetField: 获取类型为Type的字段。
+SetField: 设置类型为Type的字段的值。
+GetStaticField: 获取类型为Type的static的字段。
+SetStaticField: 设置类型为Type的static的字段的值。
+CallMethod: 调用返回类型为Type的方法。
+CallStaticMethod: 调用返回值类型为Type的static 方法。
+当然，除了这些常用的函数方法外，还有更多可以使用的函数，可以在jni.h文件中进行查看，
+或者参考https://docs.oracle.com/javase/6/docs/technotes/guides/jni/spec/jniTOC.html链接去查询相关方法
+
+
+
+
+
+
+jobject类型:
+
+jobject可以看做是java中的类实例的引用
+
+如果native方法不是static, obj 就代表native方法的类实例。
+
+如果native方法是static, obj就代表native方法的类的class
+对象实例(static 方法不需要类实例的，所以就代表这个类的class对象)。
+
+
+
+JNIEnv类中方法获取java中的类：
+
+jclass FindClass(const char* name) 根据类名来查找一个类，完整类名
+
+
+jclass GetSuperClass(jclass obj) 获取一个传入的对象获取他的父类的jclass
+
+
+
+GetMethodID: 获取非静态方法的ID
+GetStaticMethodID: 获取静态方法的ID
+
