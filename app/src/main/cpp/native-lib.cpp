@@ -8,7 +8,7 @@ extern "C" JNIEXPORT jstring JNICALL
 Java_com_gp_androidnative_JniUtils_stringFromJNI(
         JNIEnv *env, jobject /* this */) {
     std::string hello = "Hello from C++";
-    char *str="String from native C";
+//    char *str="String from native C";
     return env->NewStringUTF(hello.c_str());//str
 }
 
@@ -184,7 +184,7 @@ Java_com_gp_androidnative_JniUtils_printUserInfoAtNative(JNIEnv *env, jobject ob
     jfieldID ageFieldID = env->GetFieldID(userClazz, "age", "I");
     jfieldID nameFileID = env->GetFieldID(userClazz, "name", "Ljava/lang/String;");
     jint age = env->GetIntField(userObj, ageFieldID);
-    jstring name = env->GetObjectField(userObj, nameFileID);
+    jstring name = (jstring)env->GetObjectField(userObj, nameFileID);
     const char *cname = env->GetStringUTFChars(name, NULL);
     printf("user age --- %d, user name --- %s", age, cname);
     env->ReleaseStringUTFChars(name, cname);
@@ -199,7 +199,7 @@ Java_com_gp_androidnative_JniUtils_changeUserInfo(JNIEnv *env, jobject obj, jobj
     jfieldID ageFieldID = env->GetFieldID(userClazz, "age", "I");
     jfieldID nameFileID = env->GetFieldID(userClazz, "name", "Ljava/lang/String;");
     jint age = env->GetIntField(userObj, ageFieldID);
-    jstring name = env->GetObjectField(userObj, nameFileID);
+    jstring name = (jstring)env->GetObjectField(userObj, nameFileID);
     const char *c_name = env->GetStringUTFChars(name, NULL);
     printf("show user info age:%d name:%s", age, c_name);
     env->ReleaseStringUTFChars(name, c_name);

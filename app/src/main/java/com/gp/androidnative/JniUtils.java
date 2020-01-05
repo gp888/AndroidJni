@@ -17,7 +17,7 @@ public class JniUtils {
 
     public native String testCallMethod();  //非静态
 
-    public native String testNewJavaDate();
+    public native long testNewJavaDate();
 
     public static native String testStaticCallMethod();//静态
 
