@@ -14,7 +14,6 @@ public class JniUtils {
 
     public native String stringFromJNI();
 
-
     public native String testCallMethod();  //非静态
 
     public native long testNewJavaDate();
@@ -39,24 +38,38 @@ public class JniUtils {
 
 
 
-
-
     private String name = "Java";
 
+    //square：求int, float,double类型数值的平方
+    public native int square(int num);
+    public native float square(float num);
+    public native double square(double num);
+
+    //greetings：传一个字符串给C层，C层回传另一个字符串给Java层
+    public native String greetings(String username);
+
+    //getTwoArray：获取C层返回的一个二维数组
+    public native int[][] getTwoArray(int dimon);
+
+    //nativeSetName：C层改变Java层某个属性的值
+    public native void nativeSetName();
+
+    //doCallback：C层回调Java层方法
+    public native void doCallback();
     public void callbackForJni(String fromNative) {
         Log.d("ZLiZH", "callbackForJni---jni string from native" + fromNative);
     }
 
-    public native int square(int num);
-    public native float square(float num);
-    public native double square(double num);
-    public native String greetings(String username);
-    public native int[][] getTwoArray(int dimon);
-    public native void nativeSetName();
-    public native void doCallback();
+    //nativeGetUser：C层生成Java层某个对象并返回
     public native User nativeGetUser();
+
+    // printUserInfoAtNative：C层打印Java对象的属性值
     public native void printUserInfoAtNative(User user);
+
+    //changeUserInfo：C层改变Java对象的属性值并返回
     public native User changeUserInfo(User user);
+
+    //nativeGetUserList：C层构造Java对象列表并返回
     public native ArrayList<User> nativeGetUserList(int num);
 
     public String getName() {
